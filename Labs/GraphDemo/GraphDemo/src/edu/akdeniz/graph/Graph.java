@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 public class Graph {
-    private Map<Vertex, List<Vertex>> adjVertices;
-    private int[][] arrGraph;
+    private Map<Vertex, List<Vertex>> adjVertices;  //implementing with map
+    private int[][] arrGraph;                       //implementing with 2-dimensional array
     private  List<Integer> vertices;
     private  List<Integer> removedVertices;
     Graph() {
