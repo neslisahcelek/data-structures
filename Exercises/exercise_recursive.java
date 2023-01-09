@@ -1,18 +1,58 @@
-import java.util.List;
-import java.util.Random;
-import java.util.Stack;
+import java.util.*;
 
 public class exercise_recursive {
     public static void main(String[] args) {
         String[] arr = {"data","structure","structure", "data"};
         int[] arr1= {1,2,3,4,5};
+        System.out.println(contains(arr1,5,4));
        //int arr[] = {1,2,3,4,5};
        //System.out.println(arrMax(arr));
-   
-       for (int i : shuffle(arr1)) {
-        System.out.println(i);
-       }
+//
+//       for (int i : shuffle(arr1)) {
+//        System.out.println(i);
+//       }
     
+    }
+
+    public static boolean rec(int[] array,int x,int y,int z)
+    {
+        if(x>1 && y==0 && z==0)
+        {
+            y=x-1;
+            z=x-2;
+            return rec(array,x-1,y,z);
+        }
+        else
+        {
+            if (y > 0)
+                return rec(array, x, y - 1, z);
+            if (z > 0)
+                return rec(array, x, y, z - 1);
+        }
+
+        if(y!=z && array[x] == array[y]*array[z])
+            return true;
+        return false;
+}
+    public static boolean contains(int[] arr, int number, int index){
+        if (arr.length<3)
+            return false;
+        ArrayList<Integer> newArr = new ArrayList<>();
+        newArr = createList(arr,newArr,0);
+        if (newArr.contains(number / arr[index-1])){
+            return true;
+        }
+        else
+            return contains(arr,number,index-1);
+    }
+    public static ArrayList<Integer> createList(int[] arr, ArrayList<Integer> newArr, int index){
+        if (index == arr.length) {
+            return newArr;
+        }
+        else{
+            newArr.add(arr[index]);
+            return createList(arr, newArr, index+1);
+        }
     }
     public static int arrMax(int arr[]){
         int max = arr[0];    

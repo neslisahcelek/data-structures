@@ -13,7 +13,7 @@ public class abracadabra {
 			freq.put(c, freq.getOrDefault(c, 0)+1);		
 		}
 		
-		PriorityQueue<Node> pq = new PriorityQueue<>(Comparator.comparingInt(n->n.freq)); 
+		PriorityQueue<Node> pq = new PriorityQueue<>(Comparator.comparingInt(n->n.freq));
 		for (Map.Entry<Character,Integer> e : freq.entrySet()) {	  //sort frequencies
 			pq.add(new Node(e.getKey(), e.getValue(), null, null));		
 		}
@@ -23,7 +23,6 @@ public class abracadabra {
 			int f=n1.freq+n2.freq;
 			Node newNode = new Node(null, f, n1, n2);
 			pq.add(newNode);
-			
 		}		
 		HashMap<Character,String> h=new HashMap();
 		encode(pq.poll(), "", h);	
