@@ -2,9 +2,19 @@ import java.util.*;
 
 public class exercise_recursive {
     public static void main(String[] args) {
-        String[] arr = {"data","structure","structure", "data"};
-        int[] arr1= {1,2,3,4,5};
-        System.out.println(contains(arr1,5,4));
+        String s = "daddy";
+        char[] st = s.toCharArray();
+        ArrayList<Character> vowels = new ArrayList<>();
+        vowels.add('a');
+        vowels.add('e');
+        vowels.add('o');
+        vowels.add('u');
+        vowels.add('i');
+        System.out.println(vowel(st,  vowels,  0, 0,  0));
+
+        //String[] arr = {"data","structure","structure", "data"};
+       // int[] arr1= {1,2,3,4,5};
+       // System.out.println(contains(arr1,5,4));
        //int arr[] = {1,2,3,4,5};
        //System.out.println(arrMax(arr));
 //
@@ -13,26 +23,37 @@ public class exercise_recursive {
 //       }
     
     }
+    public static boolean vowel(char[] string, ArrayList<Character> vowels, int index, int countVowel, int countConsonant){
+        if(index==string.length){
+            if(countVowel > countConsonant)
+                return true;
+            return false;
 
-    public static boolean rec(int[] array,int x,int y,int z)
+            if(vowels.contains(string[index]))
+                return vowel(string,vowels,index+1,countVowel+1,countConsonant);
+            return vowel(string,vowels,index+1,countVowel,countConsonant+1);
+        }
+
+    }
+
+    public static boolean rec(int[] array,int high,int mid,int low)
     {
-        if(x>1 && y==0 && z==0)
+        if(high<2)
+            return false;
+
+        if(mid!=low && array[high] == array[mid]*array[low])
+            return true;
+
+        if(mid==0 && low==0)
         {
-            y=x-1;
-            z=x-2;
-            return rec(array,x-1,y,z);
+            return rec(array,high-1,high-2,high-3);
         }
         else
         {
-            if (y > 0)
-                return rec(array, x, y - 1, z);
-            if (z > 0)
-                return rec(array, x, y, z - 1);
+            if (low == 0)
+                return rec(array, high, mid-1, mid-2);
+            return rec(array, high, mid, low-1);
         }
-
-        if(y!=z && array[x] == array[y]*array[z])
-            return true;
-        return false;
 }
     public static boolean contains(int[] arr, int number, int index){
         if (arr.length<3)
@@ -83,7 +104,7 @@ public class exercise_recursive {
         return mid;
     }
 
-    public int binarySum(int[ ] data, int low, int high) { 
+    public int binarySum(int[] data, int low, int high) {
         if(low>high)
             return 0;
         if(low==high)
@@ -133,13 +154,14 @@ public class exercise_recursive {
         return "s";
     }
     
-    public static void reverseArray(int[ ] data, int low, int high) { 
+    public static int[] reverseArray(int[] data, int low, int high) {
         if (low < high) { // if at least two elements in subarray
             int temp = data[low]; 
             data[low] = data[high];
             data[high] = temp;
             reverseArray(data, low + 1, high - 1); 
         }
+        return data;
     }
 
     static int[] shuffle(int[] arr){
@@ -169,7 +191,7 @@ public class exercise_recursive {
     static int sum5(int high,int low){
         if(high>low){
             if(low%5==0)
-            return low + sum5(high,low+4);
+                return low + sum5(high,low+4);
         return sum5(high,low+1);    
         }
         return 0;  
